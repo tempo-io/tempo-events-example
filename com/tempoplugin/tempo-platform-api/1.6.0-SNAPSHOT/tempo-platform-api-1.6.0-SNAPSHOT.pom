@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.tempoplugin</groupId>
+        <artifactId>tempo-platform</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>tempo-platform-api</artifactId>
+    <url>http://tempoplugin.com</url>
+    <version>${tempo.platform.version}</version>
+
+    <name>System Plugin: Tempo Platform API</name>
+    <description>API that defines the Tempo Platform</description>
+    <packaging>atlassian-plugin</packaging>
+
+    <properties>
+        <spring.version>3.2.16.RELEASE</spring.version>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.atlassian.jira</groupId>
+            <artifactId>jira-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>jsr311-api</artifactId>
+            <version>1.1.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.atlassian.maven.plugins</groupId>
+                <artifactId>maven-jira-plugin</artifactId>
+                <version>${amps.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <productVersion>${jira.version}</productVersion>
+                    <productDataVersion>${jira.version}</productDataVersion>
+                    <extractDependencies>false</extractDependencies>
+                    <!--<productDataPath>${basedir}/src/test/resources/generated-test-resources.zip</productDataPath>-->
+                    <instructions>
+                        <Spring-Context>*;timeout:=60</Spring-Context>
+                        <Export-Package>
+                            com.tempoplugin.platform.api.agile;version="${project.version}",
+                            com.tempoplugin.platform.api.cache;version="${project.version}",
+                            com.tempoplugin.platform.api.event;version="${project.version}",
+                            com.tempoplugin.platform.api.i18n;version="${project.version}",
+                            com.tempoplugin.platform.api.issue;version="${project.version}",
+                            com.tempoplugin.platform.api.project;version="${project.version}",
+                            com.tempoplugin.platform.api.security;version="${project.version}",
+                            com.tempoplugin.platform.api.service;version="${project.version}",
+                            com.tempoplugin.platform.api.time;version="${project.version}",
+                            com.tempoplugin.platform.api.user;version="${project.version}",
+                            com.tempoplugin.platform.api.notifications;version="${project.version}",
+                            com.tempoplugin.platform.api.plugin.info;version="${project.version}"
+                        </Export-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <svnrevision>${revision.number}</svnrevision>
+                            <buildDate>${maven.build.timestamp}</buildDate>
+                        </manifestEntries>
+                    </archive>
+                    <excludes>
+                        <exclude>*.sh</exclude>
+                        <exclude>*.awk</exclude>
+                    </excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

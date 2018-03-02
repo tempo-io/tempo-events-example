@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.tempoplugin</groupId>
+  <artifactId>tempo-plan-core</artifactId>
+  <versioning>
+    <versions>
+      <version>3.12.1-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20180302140323</lastUpdated>
+  </versioning>
+</metadata>

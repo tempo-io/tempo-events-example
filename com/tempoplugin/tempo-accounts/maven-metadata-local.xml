@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.tempoplugin</groupId>
+  <artifactId>tempo-accounts</artifactId>
+  <versioning>
+    <versions>
+      <version>3.6.0-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20180302140321</lastUpdated>
+  </versioning>
+</metadata>

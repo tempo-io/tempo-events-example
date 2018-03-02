@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>tempo-pom-master</artifactId>
+        <groupId>com.tempoplugin</groupId>
+        <version>1.3.0-SNAPSHOT</version>
+    </parent>
+    <artifactId>tempo-teams</artifactId>
+    <version>${tempo.teams.version}</version>
+    <url>http://tempoplugin.com</url>
+
+    <properties>
+        <tempo.documentSpace>TEAMS</tempo.documentSpace>
+        <tempo.documentVersion>3.0</tempo.documentVersion>
+        <packaging>atlassian-plugin</packaging>
+    </properties>
+
+     <name>System Plugin: Tempo Teams</name>
+    <description>This is the Tempo Teams plugin. This plugin depends on the Tempo Core plugin and Tempo Timetracking depends on this plugin. Please do not disable or uninstall it unless instructed to do so by Tempo's support team, or unless you are uninstalling Tempo.</description>
+    <packaging>${packaging}</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>com.tempoplugin</groupId>
+            <artifactId>tempo-platform-api</artifactId>
+            <version>${tempo.platform.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.tempoplugin</groupId>
+            <artifactId>tempo-platform-api</artifactId>
+            <version>${tempo.platform.version}</version>
+            <classifier>tests</classifier>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.tempoplugin</groupId>
+            <artifactId>tempo-platform-jira</artifactId>
+            <version>${tempo.platform.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.tempoplugin</groupId>
+            <artifactId>tempo-platform-jira</artifactId>
+            <version>${tempo.platform.version}</version>
+            <classifier>tests</classifier>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.jira</groupId>
+            <artifactId>jira-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+        </dependency>
+
+        <!-- WIRED TEST RUNNER DEPENDENCIES -->
+        <dependency>
+            <groupId>com.atlassian.plugins</groupId>
+            <artifactId>atlassian-plugins-osgi-testrunner</artifactId>
+            <version>${plugin.testrunner.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>jsr311-api</artifactId>
+            <version>1.1.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.tempoplugin</groupId>
+            <artifactId>tempo-core</artifactId>
+            <version>${tempo.core.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.tempoplugin</groupId>
+            <artifactId>tempo-core</artifactId>
+            <version>${tempo.core.version}</version>
+            <classifier>tests</classifier>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.graphql-java</groupId>
+            <artifactId>graphql-java</artifactId>
+            <version>2.4.0</version>
+            <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.atlassian.maven.plugins</groupId>
+                <artifactId>maven-jira-plugin</artifactId>
+                <version>${amps.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <productVersion>${jira.version}</productVersion>
+                    <productDataVersion>${jira.version}</productDataVersion>
+                    <productDataPath>${basedir}/src/test/resources/generated-test-resources.zip</productDataPath>
+                    <extractDependencies>false</extractDependencies>
+                    <instructions>
+                        <Spring-Context>*;timeout:=60</Spring-Context>
+                        <Import-Package>
+                            <!-- Tempo Platform -->
+                            com.tempoplugin.platform.api.agile;version="0.0",
+                            com.tempoplugin.platform.api.cache;version="0.0",
+                            com.tempoplugin.platform.api.event;version="0.0",
+                            com.tempoplugin.platform.api.i18n;version="0.0",
+                            com.tempoplugin.platform.api.project;version="0.0",
+                            com.tempoplugin.platform.api.security;version="0.0",
+                            com.tempoplugin.platform.api.service;version="0.0",
+                            com.tempoplugin.platform.api.user;version="0.0",
+                            com.tempoplugin.platform.jira.agile;version="0.0",
+                            com.tempoplugin.platform.jira.cache;version="0.0",
+                            com.tempoplugin.platform.jira.event;version="0.0",
+                            com.tempoplugin.platform.jira.i18n;version="0.0",
+                            com.tempoplugin.platform.jira.project;version="0.0",
+                            com.tempoplugin.platform.jira.security;version="0.0",
+                            com.tempoplugin.platform.jira.service;version="0.0",
+                            com.tempoplugin.platform.jira.user;version="0.0",
+                            <!-- Tempo Core -->
+                            com.tempoplugin.core.cache.api;version="0.0",
+                            com.tempoplugin.core.fields.api;version="0.0",
+                            com.tempoplugin.core.holiday.api;version="0.0",
+                            com.tempoplugin.core.jiraagile.api;version="0.0",
+                            com.tempoplugin.core.license.api;version="0.0",
+                            com.tempoplugin.core.permission.api;version="0.0",
+                            com.tempoplugin.core.permission.migrate;version="0.0",
+                            com.tempoplugin.core.rest.api;version="0.0",
+                            com.tempoplugin.core.userschedule.api;version="0.0",
+                            com.tempoplugin.core.view.api;version="0.0",
+                            com.tempoplugin.core.workload.api;version="0.0",
+                            *;resolution:="optional"
+                        </Import-Package>
+                        <Export-Package>
+                            com.tempoplugin.team.api;version="${project.version}",
+                            com.tempoplugin.team.api.history;version="${project.version}",
+                            com.tempoplugin.team.api.link;version="${project.version}",
+                            com.tempoplugin.team.api.indexing;version="${project.version}",
+                            com.tempoplugin.team.api.member;version="${project.version}",
+                            com.tempoplugin.team.api.permission;version="${project.version}",
+                            com.tempoplugin.team.api.request;version="${project.version}",
+                            com.tempoplugin.team.api.role;version="${project.version}",
+                            com.tempoplugin.team.api.spi;version="${project.version}",
+                            com.tempoplugin.team.api.event;version="${project.version}"
+                        </Export-Package>
+                    </instructions>
+                    <bundledArtifacts>
+                        <bundledArtifact>
+                            <groupId>com.tempoplugin</groupId>
+                            <artifactId>tempo-platform-api</artifactId>
+                            <version>${tempo.platform.version}</version>
+                        </bundledArtifact>
+                        <bundledArtifact>
+                            <groupId>com.tempoplugin</groupId>
+                            <artifactId>tempo-platform-jira</artifactId>
+                            <version>${tempo.platform.version}</version>
+                        </bundledArtifact>
+                        <bundledArtifact>
+                            <groupId>com.tempoplugin</groupId>
+                            <artifactId>tempo-core</artifactId>
+                            <version>${tempo.core.version}</version>
+                        </bundledArtifact>
+                    </bundledArtifacts>
+                    <pluginDependencies>
+                        <pluginDependency>
+                            <groupId>com.tempoplugin</groupId>
+                            <artifactId>tempo-platform-api</artifactId>
+                        </pluginDependency>
+                        <pluginDependency>
+                            <groupId>com.tempoplugin</groupId>
+                            <artifactId>tempo-platform-jira</artifactId>
+                        </pluginDependency>
+                        <pluginDependency>
+                            <groupId>com.tempoplugin</groupId>
+                            <artifactId>tempo-core</artifactId>
+                        </pluginDependency>
+                    </pluginDependencies>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <id>generate</id>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <tasks>
+                                <echo message="Updating build info..."/>
+                                <tstamp>
+                                    <format property="BUILD_TIME" pattern="yyyy-MM-dd HH:mm:ss"/>
+                                </tstamp>
+                                <copy file="src/main/java/com/tempoplugin/team/buildinfo/BuildInfo.java.template" tofile="src/main/java/com/tempoplugin/team/buildinfo/BuildInfo.java" overwrite="true"/>
+                                <replace file="src/main/java/com/tempoplugin/team/buildinfo/BuildInfo.java">
+                                    <replacefilter token="@buildKey@" value="${build.key}"/>
+                                    <replacefilter token="@buildNum@" value="${build.number}"/>
+                                    <replacefilter token="@revisionNumber@" value="${revision.number}"/>
+                                    <replacefilter token="@buildDate@" value="${BUILD_TIME}"/>
+                                    <replacefilter token="@buildHost@" value="${env.COMPUTERNAME}"/>
+                                    <replacefilter token="@pluginName@" value="${project.name}"/>
+                                    <replacefilter token="@pluginUrl@" value="${project.url}"/>
+                                    <replacefilter token="@pluginVersion@" value="${project.version}"/>
+                                    <replacefilter token="@documentSpace@" value="${tempo.documentSpace}"/>
+                                    <replacefilter token="@documentVersion@" value="${tempo.documentVersion}"/>
+                                </replace>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <svnrevision>${revision.number}</svnrevision>
+                            <buildDate>${maven.build.timestamp}</buildDate>
+                        </manifestEntries>
+                    </archive>
+                    <excludes>
+                        <exclude>*.sh</exclude>
+                        <exclude>*.awk</exclude>
+                    </excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
