@@ -4,8 +4,8 @@
   <artifactId>tempo-platform-api</artifactId>
   <versioning>
     <versions>
-      <version>1.6.0-SNAPSHOT</version>
+      <version>1.7.0-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20180302140318</lastUpdated>
+    <lastUpdated>20180306164546</lastUpdated>
   </versioning>
 </metadata>

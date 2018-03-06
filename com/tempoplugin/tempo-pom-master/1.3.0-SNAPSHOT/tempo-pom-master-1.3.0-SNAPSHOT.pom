@@ -37,15 +37,15 @@
         <jackson.kotlin.version>2.9.2</jackson.kotlin.version>
 
         <version.suffix>-SNAPSHOT</version.suffix>
-        <tempo.accounts.version>3.6.0${version.suffix}</tempo.accounts.version>
-        <tempo.core.version>4.7.0${version.suffix}</tempo.core.version>
-        <tempo.plan.core.version>3.12.1${version.suffix}</tempo.plan.core.version>
-        <tempo.platform.version>1.6.0${version.suffix}</tempo.platform.version>
-        <tempo.teams.version>3.6.1${version.suffix}</tempo.teams.version>
-        <tempo.timesheet.version>8.8.1${version.suffix}</tempo.timesheet.version>
+        <tempo.accounts.version>3.7.0${version.suffix}</tempo.accounts.version>
+        <tempo.core.version>4.8.0${version.suffix}</tempo.core.version>
+        <tempo.plan.core.version>3.13.0${version.suffix}</tempo.plan.core.version>
+        <tempo.platform.version>1.7.0${version.suffix}</tempo.platform.version>
+        <tempo.teams.version>3.7.0${version.suffix}</tempo.teams.version>
+        <tempo.timesheet.version>8.9.0${version.suffix}</tempo.timesheet.version>
         <tempo.rest.api.public.version>1.0.0${version.suffix}</tempo.rest.api.public.version>
         <tempo.cloud.version>1.0.0-SNAPSHOT</tempo.cloud.version>
-        <tempo.budgets.version>11.7.0${version.suffix}</tempo.budgets.version>
+        <tempo.budgets.version>11.8.0${version.suffix}</tempo.budgets.version>
         <tempo.events.tests.version>1.0.0${version.suffix}</tempo.events.tests.version>
         <npm.build.skip>false</npm.build.skip>
         <npm.tests.skip>false</npm.tests.skip>

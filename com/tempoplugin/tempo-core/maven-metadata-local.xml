@@ -4,8 +4,8 @@
   <artifactId>tempo-core</artifactId>
   <versioning>
     <versions>
-      <version>4.7.0-SNAPSHOT</version>
+      <version>4.8.0-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20180302140320</lastUpdated>
+    <lastUpdated>20180306164548</lastUpdated>
   </versioning>
 </metadata>
