@@ -235,6 +235,7 @@
                             com.tempoplugin.platform.jira.service;version="0.0",
                             com.tempoplugin.platform.jira.user;version="0.0",
                             com.tempoplugin.platform.jira.time;version="0.0",
+                            com.tempoplugin.platform.user.api;version="0.0",
                             org.thymeleaf.*;resolution:="optional",
                             org.thymeleaf.spring3.*;resolution:="optional",
                             *;resolution:="optional"

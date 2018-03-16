@@ -50,6 +50,24 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                    <generatedSourcesDirectory>
+                        ${project.build.directory}/generated-sources/
+                    </generatedSourcesDirectory>
+                    <annotationProcessors>
+                        <annotationProcessor>
+                            com.tempoplugin.platform.event.processor.EventDtoProcessor
+                        </annotationProcessor>
+                    </annotationProcessors>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>com.atlassian.maven.plugins</groupId>
                 <artifactId>clover-maven-plugin</artifactId>
                 <version>4.1.1</version>
@@ -81,7 +99,8 @@
 
                         <Export-Package>
                             com.tempoplugin.timesheet.event.api;version="${project.version}",
-                            com.tempoplugin.timesheet.approval.api;version="${project.version}"
+                            com.tempoplugin.timesheet.approval.api;version="${project.version}",
+                            com.tempoplugin.timesheet.approval.event.api;version="${project.version}"
                         </Export-Package>
 
                         <Import-Package>
@@ -129,6 +148,7 @@
                             <!-- Tempo Platform -->
                             com.tempoplugin.platform.api.cache;version="0.0",
                             com.tempoplugin.platform.api.event;version="0.0",
+                            com.tempoplugin.platform.api.event.internal;version="0.0",
                             com.tempoplugin.platform.api.i18n;version="0.0",
                             com.tempoplugin.platform.api.project;version="0.0",
                             com.tempoplugin.platform.api.security;version="0.0",
@@ -137,6 +157,7 @@
                             com.tempoplugin.platform.api.user;version="0.0",
                             com.tempoplugin.platform.api.notifications;version="0.0",
                             com.tempoplugin.platform.jira.issue.internal.service;version="0.0",
+                            com.tempoplugin.platform.user.api;version="0.0",
                             <!-- ignore compile scope packages -->
                             !org.apache.batik.*;version="0.0",
                             !org.jdom.*;version="0.0",
@@ -590,6 +611,12 @@
             <version>${tempo.platform.version}</version>
             <classifier>tests</classifier>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.tempoplugin</groupId>
+            <artifactId>tempo-platform-annotation-processor</artifactId>
+            <version>${tempo.platform.version}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.tempoplugin</groupId>

@@ -50,6 +50,12 @@
         </dependency>
         <dependency>
             <groupId>com.tempoplugin</groupId>
+            <artifactId>tempo-platform-annotation-processor</artifactId>
+            <version>${tempo.platform.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.tempoplugin</groupId>
             <artifactId>tempo-platform-jira</artifactId>
             <version>${tempo.platform.version}</version>
             <classifier>tests</classifier>
@@ -458,6 +464,7 @@
                             com.tempoplugin.platform.jira.user;version="0.0",
                             com.tempoplugin.platform.jira.time;version="0.0",
                             com.tempoplugin.platform.jira.plugin.info;version="0.0",
+                            com.tempoplugin.platform.user.api;version="0.0",
                             <!-- Tempo Core -->
                             com.tempoplugin.core.cache.api;version="0.0",
                             com.tempoplugin.core.fields.api;version="0.0",
@@ -490,6 +497,8 @@
                             *;resolution:="optional"
                         </Import-Package>
                         <Export-Package>
+                            com.tempoplugin.budget.api;version="${project.version}",
+                            com.tempoplugin.budget.event.api;version="${project.version}",
                             com.tempoplugin.jira.plan.core.api*;version="${project.version}",
                             com.tempoplugin.jira.plan.core.approvals*;version="${project.version}",
                             com.tempoplugin.jira.plan.core.rest.api;version="${project.version}",
@@ -510,7 +519,9 @@
                             com.tempoplugin.folio.util.calendaring;version="${project.version}",
                             com.tempoplugin.folio.model;version="${project.version}",
                             com.tempoplugin.folio.model.expense;version="${project.version}",
-                            com.tempoplugin.folio.model.portfolio;version="${project.version}"
+                            com.tempoplugin.folio.model.portfolio;version="${project.version}",
+                            com.tempoplugin.planner.api;version="${project.version}",
+                            com.tempoplugin.planner.event.api;version="${project.version}"
                         </Export-Package>
                     </instructions>
                     <productVersion>${jira.version}</productVersion>
@@ -657,6 +668,16 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <generatedSourcesDirectory>
+                        ${project.build.directory}/generated-sources/
+                    </generatedSourcesDirectory>
+                    <annotationProcessors>
+                        <annotationProcessor>
+                            com.tempoplugin.platform.event.processor.EventDtoProcessor
+                        </annotationProcessor>
+                    </annotationProcessors>
+                </configuration>
                 <executions>
                     <execution>
                         <id>compile</id>

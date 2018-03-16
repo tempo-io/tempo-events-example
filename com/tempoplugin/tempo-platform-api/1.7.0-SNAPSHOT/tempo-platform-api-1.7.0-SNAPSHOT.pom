@@ -21,6 +21,18 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.tempoplugin</groupId>
+            <artifactId>tempo-platform-annotation</artifactId>
+            <version>${tempo.platform.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.tempoplugin</groupId>
+            <artifactId>tempo-platform-annotation-processor</artifactId>
+            <version>${tempo.platform.version}</version>
+            <scope>provided</scope>
+        </dependency>
 
         <dependency>
             <groupId>com.atlassian.jira</groupId>
@@ -46,6 +58,23 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                    <generatedSourcesDirectory>${project.build.directory}/generated-sources/
+                    </generatedSourcesDirectory>
+                    <annotationProcessors>
+                        <annotationProcessor>
+                            com.tempoplugin.platform.event.processor.EventDtoProcessor
+                        </annotationProcessor>
+                    </annotationProcessors>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>com.atlassian.maven.plugins</groupId>
                 <artifactId>maven-jira-plugin</artifactId>
                 <version>${amps.version}</version>
@@ -61,6 +90,7 @@
                             com.tempoplugin.platform.api.agile;version="${project.version}",
                             com.tempoplugin.platform.api.cache;version="${project.version}",
                             com.tempoplugin.platform.api.event;version="${project.version}",
+                            com.tempoplugin.platform.api.event.internal;version="${project.version}",
                             com.tempoplugin.platform.api.i18n;version="${project.version}",
                             com.tempoplugin.platform.api.issue;version="${project.version}",
                             com.tempoplugin.platform.api.project;version="${project.version}",
@@ -69,7 +99,8 @@
                             com.tempoplugin.platform.api.time;version="${project.version}",
                             com.tempoplugin.platform.api.user;version="${project.version}",
                             com.tempoplugin.platform.api.notifications;version="${project.version}",
-                            com.tempoplugin.platform.api.plugin.info;version="${project.version}"
+                            com.tempoplugin.platform.api.plugin.info;version="${project.version}",
+                            com.tempoplugin.platform.user.api;version="${project.version}"
                         </Export-Package>
                     </instructions>
                 </configuration>

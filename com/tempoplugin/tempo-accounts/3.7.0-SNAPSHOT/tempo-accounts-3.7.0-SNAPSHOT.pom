@@ -47,6 +47,12 @@
         </dependency>
         <dependency>
             <groupId>com.tempoplugin</groupId>
+            <artifactId>tempo-platform-annotation-processor</artifactId>
+            <version>${tempo.platform.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.tempoplugin</groupId>
             <artifactId>tempo-platform-jira</artifactId>
             <version>${tempo.platform.version}</version>
             <classifier>tests</classifier>
@@ -151,6 +157,24 @@
                 </executions>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                    <generatedSourcesDirectory>
+                        ${project.build.directory}/generated-sources/
+                    </generatedSourcesDirectory>
+                    <annotationProcessors>
+                        <annotationProcessor>
+                            com.tempoplugin.platform.event.processor.EventDtoProcessor
+                        </annotationProcessor>
+                    </annotationProcessors>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>com.atlassian.maven.plugins</groupId>
                 <artifactId>maven-jira-plugin</artifactId>
                 <version>${amps.version}</version>
@@ -181,6 +205,7 @@
                             com.tempoplugin.platform.jira.security;version="0.0",
                             com.tempoplugin.platform.jira.service;version="0.0",
                             com.tempoplugin.platform.jira.user;version="0.0",
+                            com.tempoplugin.platform.user.api;version="0.0",
                             <!-- Tempo Core -->
                             com.tempoplugin.core.cache.api;version="0.0",
                             com.tempoplugin.core.fields.api;version="0.0",
@@ -193,6 +218,8 @@
                             *;resolution:="optional"
                         </Import-Package>
                         <Export-Package>
+                            com.tempoplugin.account.api;version="${project.version}",
+                            com.tempoplugin.account.event.api;version="${project.version}",
                             com.tempoplugin.accounts.account.api;version="${project.version}",
                             com.tempoplugin.accounts.attributes.api*;version="${project.version}",
                             com.tempoplugin.accounts.customfield.api;version="${project.version}",
@@ -201,7 +228,11 @@
                             com.tempoplugin.accounts.link.api;version="${project.version}",
                             com.tempoplugin.accounts.permission.api;version="${project.version}",
                             com.tempoplugin.accounts.search.api;version="${project.version}",
-                            com.tempoplugin.accounts.rates.api;version="${project.version}"
+                            com.tempoplugin.accounts.rates.api;version="${project.version}",
+                            com.tempoplugin.category.api;version="${project.version}",
+                            com.tempoplugin.category.event.api;version="${project.version}",
+                            com.tempoplugin.customer.api;version="${project.version}",
+                            com.tempoplugin.customer.event.api;version="${project.version}"
                         </Export-Package>
                     </instructions>
                     <bundledArtifacts>

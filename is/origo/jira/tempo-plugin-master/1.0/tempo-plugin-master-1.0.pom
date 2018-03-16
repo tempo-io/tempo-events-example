@@ -6,56 +6,14 @@
     <version>1.0</version>
     <artifactId>tempo-plugin-master</artifactId>
     <packaging>pom</packaging>
+
+    <parent>
+      <groupId>com.tempoplugin</groupId>
+      <artifactId>tempo-pom-master</artifactId>
+      <version>1.3.0-SNAPSHOT</version>
+    </parent>
+
     <modules>
-        <module>tempo-core</module>
-        <module>tempo-teams</module>
         <module>origo-jira</module>
     </modules>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
-            </plugin>
-
-        </plugins>
-    </build>
-    <distributionManagement>
-        <repository>
-            <id>tmsoftware.releases</id>
-            <name>Internal Release Repository</name>
-            <url>${artifact.server}${artifact.path.releases}</url>
-        </repository>
-        <snapshotRepository>
-            <id>tmsoftware.snapshots</id>
-            <name>Internal Snapshot Repository</name>
-            <url>${artifact.server}${artifact.path.snapshots}</url>
-        </snapshotRepository>
-    </distributionManagement>
-    <repositories>
-        <repository>
-            <id>tmsoftware.releases</id>
-            <url>${artifact.server}${artifact.path.releases}</url>
-        </repository>
-        <repository>
-            <id>tmsoftware.snapshots</id>
-            <url>${artifact.server}${artifact.path.snapshots}</url>
-        </repository>
-    </repositories>
-
-    <properties>
-        <artifact.server>http://maven.tmsoftware.is/content/repositories/</artifact.server>
-        <artifact.path.releases>releases</artifact.path.releases>
-        <artifact.path.snapshots>snapshots</artifact.path.snapshots>        <build.number>9999</build.number>
-        <revision.number>8888</revision.number>
-        <!--<tempo.version.suffix>-SNAPSHOT-${build.number}</tempo.version.suffix>-->
-        <tempo.version.suffix></tempo.version.suffix>
-        <tempo.timesheets.version>7.6.3${tempo.version.suffix}</tempo.timesheets.version>
-        <tempo.core.version>1.1.2${tempo.version.suffix}</tempo.core.version>
-        <tempo.teams.version>1.0.6${tempo.version.suffix}</tempo.teams.version>
-    </properties>
 </project>
