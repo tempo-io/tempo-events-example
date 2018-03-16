@@ -674,7 +674,7 @@
                     </generatedSourcesDirectory>
                     <annotationProcessors>
                         <annotationProcessor>
-                            com.tempoplugin.platform.event.processor.EventDtoProcessor
+                            com.tempoplugin.platform.annotation.processor.PublicDtoProcessor
                         </annotationProcessor>
                     </annotationProcessors>
                 </configuration>
