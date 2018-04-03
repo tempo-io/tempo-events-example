@@ -35,13 +35,13 @@
 
     <version.suffix>-SNAPSHOT</version.suffix>
 
-    <tempo.accounts.version>3.7.0${version.suffix}</tempo.accounts.version>
-    <tempo.budgets.version>11.8.0${version.suffix}</tempo.budgets.version>
-    <tempo.core.version>4.8.0${version.suffix}</tempo.core.version>
-    <tempo.plan.core.version>3.13.0${version.suffix}</tempo.plan.core.version>
-    <tempo.platform.version>1.7.0${version.suffix}</tempo.platform.version>
-    <tempo.teams.version>3.7.0${version.suffix}</tempo.teams.version>
-    <tempo.timesheet.version>8.9.0${version.suffix}</tempo.timesheet.version>
+    <tempo.accounts.version>3.8.0${version.suffix}</tempo.accounts.version>
+    <tempo.budgets.version>11.9.0${version.suffix}</tempo.budgets.version>
+    <tempo.core.version>4.9.0${version.suffix}</tempo.core.version>
+    <tempo.plan.core.version>3.14.0${version.suffix}</tempo.plan.core.version>
+    <tempo.platform.version>1.8.0${version.suffix}</tempo.platform.version>
+    <tempo.teams.version>3.8.0${version.suffix}</tempo.teams.version>
+    <tempo.timesheet.version>8.10.0${version.suffix}</tempo.timesheet.version>
   </properties>
 
   <dependencies>
