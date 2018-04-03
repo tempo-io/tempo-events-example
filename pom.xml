@@ -209,20 +209,13 @@
 
             <Import-Package>
               com.tempoplugin.account.api;version="0.0",
-              com.tempoplugin.account.event.api;version="0.0",
-              com.tempoplugin.budget.api;version="0.0",
-              com.tempoplugin.budget.event.api;version="0.0",
+              com.tempoplugin.accounts.attributes.api;version="0.0",
               com.tempoplugin.category.api;version="0.0",
-              com.tempoplugin.category.event.api;version="0.0",
               com.tempoplugin.customer.api;version="0.0",
-              com.tempoplugin.customer.event.api;version="0.0",
-              com.tempoplugin.planner.api;version="0.0",
-              com.tempoplugin.planner.event.api;version="0.0"
-              com.tempoplugin.platform.user.api;version="0.0",
+              com.tempoplugin.budget.api;version="0.0",
               com.tempoplugin.team.api;version="0.0",
-              com.tempoplugin.team.event.api;version="0.0",
+              com.tempoplugin.planner.api;version="0.0",
               com.tempoplugin.timesheet.approval.api;version="0.0",
-              com.tempoplugin.timesheet.approval.event.api;version="0.0",
               *;resolution:="optional"
             </Import-Package>
 
