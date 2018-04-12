@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.tempoplugin</groupId>
+  <artifactId>tempo-events-example</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+
+  <name>System Test Plugin: Tempo Events Example</name>
+  <description>JIRA Plugin example to listen to Tempo Events</description>
+  <packaging>atlassian-plugin</packaging>
+
+  <organization>
+    <name>Tempo</name>
+    <url>http://www.tempo.io</url>
+  </organization>
+
+  <properties>
+    <atlassian.spring.scanner.version>1.2.13</atlassian.spring.scanner.version>
+    <!-- This key is used to keep the consistency between the key in atlassian-plugin.xml and the key to generate bundle. -->
+    <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
+    <!-- TestKit version 6.x for JIRA 6.x -->
+    <testkit.version>6.3.11</testkit.version>
+    <amps.version>6.2.11</amps.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <quickreload.version>2.0.0</quickreload.version>
+
+    <kotlin.version>1.2.30</kotlin.version>
+    <junit.version>5.0.1</junit.version>
+    <jira.version>7.1.0</jira.version>
+
+    <version.suffix>-SNAPSHOT</version.suffix>
+
+    <tempo.accounts.version>3.8.0${version.suffix}</tempo.accounts.version>
+    <tempo.budgets.version>11.9.0${version.suffix}</tempo.budgets.version>
+    <tempo.core.version>4.9.0${version.suffix}</tempo.core.version>
+    <tempo.plan.core.version>3.14.0${version.suffix}</tempo.plan.core.version>
+    <tempo.platform.version>1.8.0${version.suffix}</tempo.platform.version>
+    <tempo.teams.version>3.8.0${version.suffix}</tempo.teams.version>
+    <tempo.timesheet.version>8.10.0${version.suffix}</tempo.timesheet.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-stdlib-jdk8</artifactId>
+      <version>${kotlin.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <artifactId>kotlin-reflect</artifactId>
+      <version>${kotlin.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.atlassian.jira</groupId>
+      <artifactId>jira-api</artifactId>
+      <version>${jira.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>2.5.5</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.ws.rs</groupId>
+      <artifactId>jsr311-api</artifactId>
+      <version>1.1.1</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.tempoplugin</groupId>
+      <artifactId>tempo-platform-api</artifactId>
+      <version>${tempo.platform.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.tempoplugin</groupId>
+      <artifactId>tempo-platform-jira</artifactId>
+      <version>${tempo.platform.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.tempoplugin</groupId>
+      <artifactId>tempo-core</artifactId>
+      <version>${tempo.core.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.tempoplugin</groupId>
+      <artifactId>tempo-accounts</artifactId>
+      <version>${tempo.accounts.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.tempoplugin</groupId>
+      <artifactId>tempo-teams</artifactId>
+      <version>${tempo.teams.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.tempoplugin</groupId>
+      <artifactId>tempo-plan-core</artifactId>
+      <version>${tempo.plan.core.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>is.origo.jira</groupId>
+      <artifactId>tempo-plugin</artifactId>
+      <version>${tempo.timesheet.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.atlassian.plugin</groupId>
+      <artifactId>atlassian-spring-scanner-annotation</artifactId>
+      <version>${atlassian.spring.scanner.version}</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.atlassian.plugin</groupId>
+      <artifactId>atlassian-spring-scanner-runtime</artifactId>
+      <version>${atlassian.spring.scanner.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+
+    <!-- Uncomment to use TestKit in your project. Details at https://bitbucket.org/atlassian/jira-testkit -->
+    <!-- You can read more about TestKit at https://developer.atlassian.com/display/JIRADEV/Plugin+Tutorial+-+Smarter+integration+testing+with+TestKit -->
+    <!--
+    <dependency>
+        <groupId>com.atlassian.jira.tests</groupId>
+        <artifactId>jira-testkit-client</artifactId>
+        <version>${testkit.version}</version>
+        <scope>test</scope>
+    </dependency>
+    -->
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy</id>
+            <phase>package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <copyPom>true</copyPom>
+              <addParentPoms>true</addParentPoms>
+              <includeGroupIds>
+                com.tempoplugin,is.origo.jira
+              </includeGroupIds>
+              <useRepositoryLayout>true</useRepositoryLayout>
+              <includeScope>compile</includeScope>
+              <outputDirectory>
+                ${project.build.directory}/m2-repository
+              </outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.atlassian.maven.plugins</groupId>
+        <artifactId>maven-jira-plugin</artifactId>
+        <version>${amps.version}</version>
+        <extensions>true</extensions>
+        <configuration>
+          <productVersion>${jira.version}</productVersion>
+          <productDataVersion>${jira.version}</productDataVersion>
+          <!-- Uncomment to install TestKit backdoor in JIRA. -->
+          <!--
+          <pluginArtifacts>
+              <pluginArtifact>
+                  <groupId>com.atlassian.jira.tests</groupId>
+                  <artifactId>jira-testkit-plugin</artifactId>
+                  <version>${testkit.version}</version>
+              </pluginArtifact>
+          </pluginArtifacts>
+          -->
+          <pluginArtifacts>
+            <pluginArtifact>
+              <groupId>com.atlassian.labs.plugins</groupId>
+              <artifactId>quickreload</artifactId>
+              <version>${quickreload.version}</version>
+            </pluginArtifact>
+          </pluginArtifacts>
+
+          <enableQuickReload>true</enableQuickReload>
+          <enableFastdev>false</enableFastdev>
+
+          <!-- See here for an explanation of default instructions: -->
+          <!-- https://developer.atlassian.com/docs/advanced-topics/configuration-of-instructions-in-atlassian-plugins -->
+          <instructions>
+            <Atlassian-Plugin-Key>${atlassian.plugin.key}</Atlassian-Plugin-Key>
+
+            <Export-Package>com.tempoplugin.events</Export-Package>
+
+            <Import-Package>
+              com.tempoplugin.account.api;version="0.0",
+              com.tempoplugin.accounts.attributes.api;version="0.0",
+              com.tempoplugin.category.api;version="0.0",
+              com.tempoplugin.customer.api;version="0.0",
+              com.tempoplugin.budget.api;version="0.0",
+              com.tempoplugin.team.api;version="0.0",
+              com.tempoplugin.planner.api;version="0.0",
+              com.tempoplugin.timesheet.approval.api;version="0.0",
+              *;resolution:="optional"
+            </Import-Package>
+
+            <Spring-Context>*;timeout:=60</Spring-Context>
+          </instructions>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>com.atlassian.plugin</groupId>
+        <artifactId>atlassian-spring-scanner-maven-plugin</artifactId>
+        <version>${atlassian.spring.scanner.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>atlassian-spring-scanner</goal>
+            </goals>
+            <phase>process-classes</phase>
+          </execution>
+        </executions>
+        <configuration>
+          <scannedDependencies>
+            <dependency>
+              <groupId>com.atlassian.plugin</groupId>
+              <artifactId>atlassian-spring-scanner-external-jar</artifactId>
+            </dependency>
+          </scannedDependencies>
+          <verbose>false</verbose>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.jetbrains.kotlin</groupId>
+        <artifactId>kotlin-maven-plugin</artifactId>
+        <version>${kotlin.version}</version>
+        <executions>
+          <execution>
+            <id>compile</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>test-compile</id>
+            <phase>test-compile</phase>
+            <goals>
+              <goal>test-compile</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <jvmTarget>1.8</jvmTarget>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.6.2</version>
+        <executions>
+          <execution>
+            <id>compile</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>testCompile</id>
+            <phase>test-compile</phase>
+            <goals>
+              <goal>testCompile</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+  <repositories>
+    <repository>
+      <id>tempo-events-repo</id>
+      <url>https://github.com/tempo-io/tempo-events-example/raw/repository</url>
+    </repository>
+  </repositories>
+
+</project>
