@@ -42,6 +42,10 @@ import com.tempoplugin.team.api.event.TeamEvent
 import com.tempoplugin.team.api.event.TeamUpdatedEvent
 import com.tempoplugin.timesheet.approval.api.Approval
 import com.tempoplugin.timesheet.approval.api.event.ApprovalEvent
+import com.tempoplugin.workattribute.api.event.WorkAttributeCreatedEvent
+import com.tempoplugin.workattribute.api.event.WorkAttributeDeletedEvent
+import com.tempoplugin.workattribute.api.event.WorkAttributeEvent
+import com.tempoplugin.workattribute.api.event.WorkAttributeUpdatedEvent
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.DisposableBean
 import org.springframework.beans.factory.InitializingBean
@@ -70,7 +74,7 @@ constructor(@param:ComponentImport
      */
     /*
     @EventListener
-    fun onTempoEvent(event: Event) {
+    fun onTempoEvent(event: com.tempoplugin.platform.api.event.Event) {
 
         logger.info("Received event of type ${event.javaClass}")
     }
@@ -276,5 +280,21 @@ constructor(@param:ComponentImport
     fun onWorklogEvent(event: WorklogEvent) {
 
         logger.info("Received event of type ${event.javaClass}")
+    }
+
+    @EventListener
+    fun onWorkAttributeEvent(event: WorkAttributeEvent) {
+
+        when(event) {
+            is WorkAttributeCreatedEvent -> {
+                logger.info("A new work attribute has been created : ${event.workAttribute.id}")
+            }
+            is WorkAttributeUpdatedEvent -> {
+                logger.info("The work attribute '${event.workAttribute.id}' has been updated!")
+            }
+            is WorkAttributeDeletedEvent -> {
+                logger.info("Work attribute '${event.workAttribute.id}' has been deleted!")
+            }
+        }
     }
 }
