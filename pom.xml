@@ -33,15 +33,15 @@
     <junit.version>5.0.1</junit.version>
     <jira.version>7.1.0</jira.version>
 
-    <version.suffix>-SNAPSHOT</version.suffix>
+    <version.suffix></version.suffix>
 
-    <tempo.accounts.version>3.8.0${version.suffix}</tempo.accounts.version>
-    <tempo.budgets.version>11.9.0${version.suffix}</tempo.budgets.version>
-    <tempo.core.version>4.9.0${version.suffix}</tempo.core.version>
-    <tempo.plan.core.version>3.14.0${version.suffix}</tempo.plan.core.version>
-    <tempo.platform.version>1.8.0${version.suffix}</tempo.platform.version>
-    <tempo.teams.version>3.8.0${version.suffix}</tempo.teams.version>
-    <tempo.timesheet.version>8.10.0${version.suffix}</tempo.timesheet.version>
+    <tempo.accounts.version>6.2.0${version.suffix}</tempo.accounts.version>
+    <tempo.budgets.version>13.2.0${version.suffix}</tempo.budgets.version>
+    <tempo.core.version>6.2.0${version.suffix}</tempo.core.version>
+    <tempo.plan.core.version>6.2.0${version.suffix}</tempo.plan.core.version>
+    <tempo.platform.version>6.2.0${version.suffix}</tempo.platform.version>
+    <tempo.teams.version>6.2.0${version.suffix}</tempo.teams.version>
+    <tempo.timesheet.version>10.2.0${version.suffix}</tempo.timesheet.version>
   </properties>
 
   <dependencies>
@@ -216,6 +216,7 @@
               com.tempoplugin.team.api;version="0.0",
               com.tempoplugin.planner.api;version="0.0",
               com.tempoplugin.timesheet.approval.api;version="0.0",
+              com.tempoplugin.workattribute.api;version="0.0",
               *;resolution:="optional"
             </Import-Package>
 
