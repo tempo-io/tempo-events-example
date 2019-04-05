@@ -26,7 +26,7 @@ Class [hierarchy](doc/tempo-events.png) of the event classes.
 
 ## Tempo Accounts
 
-### Acount
+### Account
 ![Account](doc/tempo-events-account.svg)
 
 ### Category
@@ -55,6 +55,12 @@ Class [hierarchy](doc/tempo-events.png) of the event classes.
 
 ### Team
 ![Team](doc/tempo-events-team.svg)
+
+## Tempo Core
+
+### Work Attribute
+![WorkAttribute](doc/tempo-events-work-attribute.svg)
+
 
 ## Tempo Timesheets
 
